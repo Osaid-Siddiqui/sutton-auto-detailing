@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 import { Button } from "../../components/ui/button";
-import { Mail, Phone, MapPin, ChevronLeft, ChevronRight, Facebook, Instagram, Twitter, Send } from "lucide-react";
+import BeforeAfterSlider from "../../components/BeforeAfterSlider";
+import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Send } from "lucide-react";
 
 const navItems = [
   { label: "Home", to: "home" },
@@ -95,28 +96,6 @@ const pricingPlans = [
     ],
     popular: true,
   },
-  {
-    name: "Deluxe Detail",
-    price: "$299",
-    features: [
-      "Everything in Premium",
-      "Paint correction",
-      "Scratch removal",
-      "Trim restoration",
-      "Undercarriage wash",
-    ],
-  },
-  {
-    name: "Ceramic Coating",
-    price: "$499",
-    features: [
-      "Everything in Deluxe",
-      "Ceramic coating application",
-      "5-year protection",
-      "Hydrophobic finish",
-      "UV protection",
-    ],
-  },
 ];
 
 const testimonials = [
@@ -202,12 +181,23 @@ export const Homepage = (): JSX.Element => {
         </div>
       </header>
 
+      <Link to="contact" smooth={true} offset={-80} duration={500}>
+        <motion.div
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="fixed right-0 top-1/2 -translate-y-1/2 z-50 bg-[#e50914] text-black px-5 py-3 rounded-l-xl shadow-2xl cursor-pointer hover:brightness-110"
+        >
+          Contact Us
+        </motion.div>
+      </Link>
+
       {/* Hero Section */}
       <section
         id="home"
         className="relative min-h-screen w-full flex items-center justify-center pt-20"
         style={{
-          backgroundImage: "linear-gradient(rgba(229, 9, 20, 0.7), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&h=1080&fit=crop')",
+          backgroundImage: "linear-gradient(rgba(229, 9, 20, 0.5), rgba(0, 0, 0, 0.6)), url('https://cdn.builder.io/api/v1/image/assets%2F9ab8e508a5dd4fd286dff8e2b78a4923%2F8daea657ee104b8fbeac95a0f9f9578c?format=webp&width=1920')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -362,18 +352,7 @@ export const Homepage = (): JSX.Element => {
               </div>
             </motion.div>
 
-            <button
-              onClick={prevService}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-[#e50914] hover:bg-[#b8070f] text-white p-3 rounded-full transition-all hover:scale-110"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              onClick={nextService}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#e50914] hover:bg-[#b8070f] text-white p-3 rounded-full transition-all hover:scale-110"
-            >
-              <ChevronRight size={24} />
-            </button>
+
 
             <div className="flex justify-center gap-2 mt-8">
               {services.map((_, index) => (
@@ -411,35 +390,12 @@ export const Homepage = (): JSX.Element => {
             {galleryImages.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative overflow-hidden rounded-lg shadow-lg group cursor-pointer bg-gray-900 border border-gray-800"
+                transition={{ duration: 0.4, delay: index * 0.08 }}
               >
-                <div className="relative h-64">
-                  <img
-                    src={item.before}
-                    alt={`Before ${index + 1}`}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <img
-                    src={item.after}
-                    alt={`After ${index + 1}`}
-                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-                  />
-                  <div className="absolute top-4 left-4 bg-black/70 text-white px-3 py-1 rounded text-sm font-bold">
-                    BEFORE
-                  </div>
-                  <div className="absolute top-4 right-4 bg-[#e50914] text-white px-3 py-1 rounded text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    AFTER
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="bg-[#e50914] text-white px-6 py-2 rounded-full font-bold">
-                      Hover to see After
-                    </span>
-                  </div>
-                </div>
+                <BeforeAfterSlider before={item.before} after={item.after} height={256} />
               </motion.div>
             ))}
           </div>
@@ -555,18 +511,7 @@ export const Homepage = (): JSX.Element => {
               </div>
             </motion.div>
 
-            <button
-              onClick={prevTestimonial}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-[#e50914] hover:bg-[#b8070f] text-white p-3 rounded-full transition-all hover:scale-110"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              onClick={nextTestimonial}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#e50914] hover:bg-[#b8070f] text-white p-3 rounded-full transition-all hover:scale-110"
-            >
-              <ChevronRight size={24} />
-            </button>
+
 
             <div className="flex justify-center gap-2 mt-8">
               {testimonials.map((_, index) => (
