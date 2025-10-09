@@ -131,21 +131,7 @@ export const Homepage = (): JSX.Element => {
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState("");
 
-  const nextService = () => {
-    setCurrentServiceIndex((prev) => (prev + 1) % services.length);
-  };
 
-  const prevService = () => {
-    setCurrentServiceIndex((prev) => (prev - 1 + services.length) % services.length);
-  };
-
-  const nextTestimonial = () => {
-    setCurrentTestimonialIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
 
   return (
     <div className="flex flex-col items-center bg-black">
