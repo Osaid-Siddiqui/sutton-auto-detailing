@@ -18,21 +18,25 @@ const navItems = [
 const services = [
   {
     title: "Interior Detailing",
+    value: "interior",
     description: "Deep cleaning, vacuuming, and leather conditioning for a pristine interior.",
     image: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=800&h=600&fit=crop",
   },
   {
     title: "Exterior Detailing",
+    value: "exterior",
     description: "Wash, polish, wax, and protection coating for a showroom shine.",
     image: "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=800&h=600&fit=crop",
   },
   {
     title: "Full Detailing",
+    value: "full",
     description: "Complete inside-out service for your vehicle with premium care.",
     image: "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=800&h=600&fit=crop",
   },
   {
     title: "Ceramic Coating",
+    value: "ceramic",
     description: "Long-lasting shine and superior surface protection for years to come.",
     image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop",
   },
@@ -130,7 +134,7 @@ export const Homepage = (): JSX.Element => {
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState("");
-
+  const [selectedService, setSelectedService] = useState("");
 
 
   return (
@@ -141,7 +145,7 @@ export const Homepage = (): JSX.Element => {
           <img
             src="https://c.animaapp.com/mgjq4pouROb7EA/img/whatsapp_image_2025-10-08_at_6-23-49_pm-removebg-preview.png"
             alt="Sutton Auto Details"
-            className="h-16 object-contain"
+            className="h-24 object-contain"
           />
 
           <nav className="flex gap-8 items-center">
@@ -323,7 +327,10 @@ export const Homepage = (): JSX.Element => {
                     {services[currentServiceIndex].description}
                   </p>
                   <Link to="contact" smooth={true} offset={-80} duration={500}>
-                    <Button className="px-8 py-4 bg-[#e50914] hover:bg-[#b8070f] text-white rounded-lg transition-transform hover:scale-105 w-fit">
+                    <Button
+                      onClick={() => setSelectedService(services[currentServiceIndex].value)}
+                      className="px-8 py-4 bg-[#e50914] hover:bg-[#b8070f] text-white rounded-lg transition-transform hover:scale-105 w-fit"
+                    >
                       Book Now
                     </Button>
                   </Link>
@@ -390,7 +397,7 @@ export const Homepage = (): JSX.Element => {
 
       {/* Pricing Section */}
       <section id="pricing" className="w-full py-20 bg-black">
-        <div className="max-w-[1400px] mx-auto px-6">
+        <div className="max-w-[1280px] mx-auto px-6 relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -405,7 +412,7 @@ export const Homepage = (): JSX.Element => {
             <p className="text-xl text-gray-300">Choose the perfect package for your vehicle</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
             {pricingPlans.map((plan, index) => (
               <motion.div
                 key={index}
@@ -413,7 +420,7 @@ export const Homepage = (): JSX.Element => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative bg-gradient-to-b from-gray-900 to-black rounded-2xl shadow-xl p-6 border-2 ${
+                className={`relative w-full max-w-sm bg-gradient-to-b from-gray-900 to-black rounded-2xl shadow-xl p-6 border-2 ${
                   plan.popular ? "border-[#e50914] transform scale-105" : "border-gray-800"
                 }`}
               >
@@ -449,6 +456,16 @@ export const Homepage = (): JSX.Element => {
               </motion.div>
             ))}
           </div>
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            className="hidden lg:flex items-center gap-2 absolute right-0 top-1/2 -translate-y-1/2 bg-[#e50914] text-white px-4 py-2 rounded-l-full shadow-2xl"
+          >
+            <span className="font-extrabold tracking-wide">Limited Time Offer</span>
+          </motion.div>
         </div>
       </section>
 
@@ -613,6 +630,8 @@ export const Homepage = (): JSX.Element => {
                   <label className="block text-white mb-2 font-medium">Service</label>
                   <select
                     className="w-full px-4 py-3 rounded-lg bg-black text-white border border-gray-700 focus:border-[#e50914] focus:outline-none transition-colors"
+                    value={selectedService}
+                    onChange={(e) => setSelectedService(e.target.value)}
                   >
                     <option value="">Select a service</option>
                     <option value="interior">Interior Detailing</option>
@@ -669,7 +688,7 @@ export const Homepage = (): JSX.Element => {
               <img
                 src="https://c.animaapp.com/mgjq4pouROb7EA/img/whatsapp_image_2025-10-08_at_6-23-49_pm-removebg-preview.png"
                 alt="Sutton Auto Details"
-                className="h-16 object-contain mb-4"
+                className="h-20 object-contain mb-4"
               />
               <p className="text-gray-400 text-sm">
                 Montgomery's premier auto detailing service. Bringing your vehicle's shine back to life.
