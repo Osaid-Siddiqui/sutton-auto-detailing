@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 import { Button } from "../../components/ui/button";
-import BeforeAfterSlider from "../../components/BeforeAfterSlider";
 import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Send } from "lucide-react";
 
 const navItems = [
@@ -43,26 +42,16 @@ const services = [
 ];
 
 const galleryImages = [
-  {
-    before: "https://images.unsplash.com/photo-1449130015084-2dc954a6d1ae?w=600&h=600&fit=crop",
-    after: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=600&fit=crop",
-  },
-  {
-    before: "https://images.unsplash.com/photo-1486496146582-9ffcd0b2b2b7?w=600&h=600&fit=crop",
-    after: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&h=600&fit=crop",
-  },
-  {
-    before: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=600&fit=crop",
-    after: "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=600&h=600&fit=crop",
-  },
-  {
-    before: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&h=600&fit=crop",
-    after: "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=600&h=600&fit=crop",
-  },
-  {
-    before: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=600&fit=crop",
-    after: "https://c.animaapp.com/mgjq4pouROb7EA/img/image.png",
-  },
+  "https://cdn.builder.io/api/v1/image/assets%2F5ea4b1680de74be58c62aa3fdc28c495%2Fd1c9da1f326d4092984306e18b35c97b?format=webp&width=800&height=1200",
+  "https://cdn.builder.io/api/v1/image/assets%2F5ea4b1680de74be58c62aa3fdc28c495%2F760b4cd23f004939b7f9bcc34212cd8f?format=webp&width=800&height=1200",
+  "https://cdn.builder.io/api/v1/image/assets%2F5ea4b1680de74be58c62aa3fdc28c495%2Fc66abd2976d147df94f9030a056c2776?format=webp&width=800&height=1200",
+  "https://cdn.builder.io/api/v1/image/assets%2F5ea4b1680de74be58c62aa3fdc28c495%2Fbe76906aa10f492093de7afb9a219d6e?format=webp&width=800&height=1200",
+  "https://cdn.builder.io/api/v1/image/assets%2F5ea4b1680de74be58c62aa3fdc28c495%2F63cd67eadf7a443386d88c8c494285fb?format=webp&width=800&height=1200",
+  "https://cdn.builder.io/api/v1/image/assets%2F5ea4b1680de74be58c62aa3fdc28c495%2F4ec3c28f8bd34d3db04d97ef5aaadd87?format=webp&width=800&height=1200",
+  "https://cdn.builder.io/api/v1/image/assets%2F5ea4b1680de74be58c62aa3fdc28c495%2F1e5aa21de4cc43e5b4a0809e2438dbb5?format=webp&width=800&height=1200",
+  "https://cdn.builder.io/api/v1/image/assets%2F5ea4b1680de74be58c62aa3fdc28c495%2F704af9fd64f9467797f8ef19e4ebb72c?format=webp&width=800&height=1200",
+  "https://cdn.builder.io/api/v1/image/assets%2F5ea4b1680de74be58c62aa3fdc28c495%2Ffabe0480989f49398a9a3935578daa48?format=webp&width=800&height=1200",
+  "https://cdn.builder.io/api/v1/image/assets%2F5ea4b1680de74be58c62aa3fdc28c495%2F9a05208d3aa14d47bb0e19497f054047?format=webp&width=800&height=1200",
 ];
 
 const pricingPlans = [
@@ -187,7 +176,7 @@ export const Homepage = (): JSX.Element => {
         id="home"
         className="relative min-h-screen w-full flex items-center justify-center pt-20"
         style={{
-          backgroundImage: "linear-gradient(rgba(229, 9, 20, 0.5), rgba(0, 0, 0, 0.6)), url('https://cdn.builder.io/api/v1/image/assets%2F9ab8e508a5dd4fd286dff8e2b78a4923%2F8daea657ee104b8fbeac95a0f9f9578c?format=webp&width=1920')",
+          backgroundImage: "linear-gradient(rgba(229, 9, 20, 0.5), rgba(0, 0, 0, 0.6)), url('https://cdn.builder.io/api/v1/image/assets%2F5ea4b1680de74be58c62aa3fdc28c495%2Fbab6dea48bcc42e08e008f6fb3ad3b3a?format=webp&width=800&height=1200')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -380,15 +369,20 @@ export const Homepage = (): JSX.Element => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryImages.map((item, index) => (
+            {galleryImages.map((image, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
+                className="overflow-hidden rounded-lg shadow-lg"
               >
-                <BeforeAfterSlider before={item.before} after={item.after} height={256} />
+                <img
+                  src={image}
+                  alt={`Gallery image ${index + 1}`}
+                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                />
               </motion.div>
             ))}
           </div>
